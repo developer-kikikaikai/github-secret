@@ -54,19 +54,17 @@ func (api *apiSecret) Update(name, secret string) error {
 		return err
 	}
 	pkBase64 := pubKey.GetKey()
-	_pk := make([]byte, len(pkBase64))
-	_, err = base64.StdEncoding.Decode(_pk, []byte(pkBase64))
+	// A length of base64 decoded value is less than a length of base64 encoded value
+	// There is a case to dead this code if it keeps just 32 length.
+	pk := make([]byte, len(pkBase64))
+	_, err = base64.StdEncoding.Decode(pk, []byte(pkBase64))
 	if err != nil {
 		fmt.Println("base64 decode error:", pkBase64, err.Error())
 		return err
 	}
-	pk := make([]byte, 32)
-	for i, _ := range pk {
-		pk[i] = _pk[i]
-	}
 
 	// encrypts by sodium
-	encSec := sodium.Bytes(secret).SealedBox(sodium.BoxPublicKey{Bytes: pk})
+	encSec := sodium.Bytes(secret).SealedBox(sodium.BoxPublicKey{Bytes: pk[:32]})
 	encSecBase64 := base64.StdEncoding.EncodeToString(encSec)
 
 	// Update secret
