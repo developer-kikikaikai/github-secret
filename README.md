@@ -7,7 +7,7 @@ Please get token from [Personal access tokens](https://github.com/settings/token
 ./github-secret <command type> [options]
 	<command type>, command type is one of following commands:update delete get list 
 ```
-### update
+### ./github-secret update
 
 Please call `make install` at first to install libsodium
 
@@ -24,7 +24,7 @@ Please call `make install` at first to install libsodium
     	access token (default environment value of "GITHUB_TOKEN")
 ```
 
-### delete
+### ./github-secret delete
 ```
   -owner string
         [required] repository owner (default "Please set the value")
@@ -35,7 +35,7 @@ Please call `make install` at first to install libsodium
   -token string
     	access token (default environment value of "GITHUB_TOKEN")
 ```
-### get
+### ./github-secret get
 ```
   -owner string
         [required] repository owner (default "Please set the value")
@@ -46,7 +46,7 @@ Please call `make install` at first to install libsodium
   -token string
     	access token (default environment value of "GITHUB_TOKEN")
 ```
-### list
+### ./github-secret list
 ```
   -owner string
         [required] repository owner (default "Please set the value")
